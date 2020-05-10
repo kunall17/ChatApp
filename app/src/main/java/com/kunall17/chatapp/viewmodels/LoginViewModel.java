@@ -34,7 +34,7 @@ public class LoginViewModel extends AndroidViewModel {
     public void navigateToChat(String username) {
         Intent intent = new Intent(getApplication(), ChatRoomsActivity.class);
         intent.putExtra("username", username);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         getApplication().startActivity(intent);
     }
 
