@@ -19,14 +19,15 @@ import java.util.List;
 
 public class ChatRoomsViewModel extends ViewModel {
 
-    //    private APIRepository APIRepository;
+    private final String username;
     private MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
     private MutableLiveData<List<ChatRoom>> chatRoomList = new MutableLiveData<>();
 
-    public ChatRoomsViewModel() {
+    public ChatRoomsViewModel(String username) {
         isLoading.setValue(false);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         init();
+        this.username = username;
     }
 
     public MutableLiveData<List<ChatRoom>> getChatRoomList() {
@@ -68,6 +69,7 @@ public class ChatRoomsViewModel extends ViewModel {
             ChatRoom chatRoom = this.getChatRoomList().getValue().get(adapterPosition);
             Intent intent = new Intent(context, ChatActivity.class);
             intent.putExtra("title", chatRoom.getTitle());
+            intent.putExtra("username", username);
             context.startActivity(intent);
         }
     }
