@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="4dp"
+        android:layout_toLeftOf="@id/timestamp"
+        android:layout_weight="1"
+        android:background="@drawable/sent_bg"
+        android:textAlignment="textStart"
+        android:textColor="#748CF4"
+        tools:text="AKSDASJD ASJD JASD ASKJD KJ" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/message"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="4dp"
+        android:layout_weight="1"
+        android:textSize="8sp"
+        tools:text="13m ago" />
+</RelativeLayout>

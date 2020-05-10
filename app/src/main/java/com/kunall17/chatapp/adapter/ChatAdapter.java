@@ -15,6 +15,9 @@ import com.kunall17.chatapp.viewmodels.ChatViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.kunall17.chatapp.viewmodels.ChatViewModel.VIEW_TYPE_RECIEVED;
+import static com.kunall17.chatapp.viewmodels.ChatViewModel.VIEW_TYPE_SELF;
+
 public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
 
     private final ChatViewModel dataViewModel;
@@ -40,10 +43,20 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
         return chatRoomList.size();
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return dataViewModel.getItemViewType(position);
+    }
+
     @NonNull
     @Override
     public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ChatViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item, parent, false), dataViewModel);
+        if (viewType == VIEW_TYPE_RECIEVED)
+            return new ChatViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item_recieved, parent, false), dataViewModel);
+        else if (viewType == VIEW_TYPE_SELF)
+            return new ChatViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_item_sent, parent, false), dataViewModel);
+        else
+            throw new RuntimeException("invalid");
     }
 
     @Override

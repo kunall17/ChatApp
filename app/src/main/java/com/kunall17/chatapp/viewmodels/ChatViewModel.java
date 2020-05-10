@@ -78,4 +78,16 @@ public class ChatViewModel extends ViewModel {
     private String getNewIdForMessage() {
         return String.valueOf(System.currentTimeMillis() / 1000);
     }
+
+    public boolean isSelfMessage(int adapterPosition) {
+        if (chatRoomList.getValue() == null)
+            throw new RuntimeException("chat room list cannot be null");
+        return chatRoomList.getValue().get(adapterPosition).username.equals(username);
+    }
+
+    public int getItemViewType(int position) {
+        if (isSelfMessage(position))
+            return VIEW_TYPE_SELF;
+        else return VIEW_TYPE_RECIEVED;
+    }
 }

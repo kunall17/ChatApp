@@ -19,17 +19,27 @@ public class ChatViewHolder extends RecyclerView.ViewHolder {
     private final AppCompatTextView message;
     private final AppCompatTextView timestamp;
     private final AppCompatTextView username;
+    private final AppCompatTextView userImage;
+    private final ChatViewModel viewModel;
 
     public ChatViewHolder(@NonNull View itemView, ChatViewModel dataViewModel) {
         super(itemView);
         this.message = itemView.findViewById(R.id.message);
         this.username = itemView.findViewById(R.id.username);
         this.timestamp = itemView.findViewById(R.id.timestamp);
+        this.userImage = itemView.findViewById(R.id.userImage);
+        this.viewModel = dataViewModel;
     }
 
     public void set(Message message) {
+        boolean isSelf = viewModel.isSelfMessage(getAdapterPosition());
+        if (!isSelf) {
+            userImage.setText(message.getUsername().substring(0, 1));
+            this.username.setText(message.getUsername());
+        } else {
+
+        }
         this.message.setText(message.getMessage());
-        this.username.setText(message.getUsername());
 
         try {
             Date time = new Date(message.getTimestamp() * 1000);
@@ -39,6 +49,5 @@ public class ChatViewHolder extends RecyclerView.ViewHolder {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
