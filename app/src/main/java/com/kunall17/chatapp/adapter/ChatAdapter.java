@@ -29,7 +29,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatViewHolder> {
 
     public void setData(List<Message> newList) {
         DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(new Diff(this.chatRoomList, newList));
-        chatRoomList = newList;
+        for (int i = chatRoomList.size(); i < newList.size(); i++) {
+            chatRoomList.add(newList.get(i));
+        }
         diffResult.dispatchUpdatesTo(this);
     }
 
