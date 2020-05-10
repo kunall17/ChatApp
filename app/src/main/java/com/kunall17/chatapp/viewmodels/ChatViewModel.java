@@ -46,11 +46,14 @@ public class ChatViewModel extends ViewModel {
     }
 
     public void loadNewElements(Long key) {
-        Log.d("ChatViewModelseehere", "loadNewElements() called with: key = [" + key + "]");
-        mDb.orderByKey().limitToLast(1).addChildEventListener(new ChildEventListener() {
+        mDb.limitToLast(1).addChildEventListener(new ChildEventListener() {
+            boolean first = true;
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Log.d("ChatViewModelseehere", "onChildAdded() called with: dataSnapshot = [" + dataSnapshot + "], s = [" + s + "]");
+                if (first) {
+                    first = false;
+                    return;
+                }
                 List<Message> rooms = chatRoomList.getValue();
                 Message message = dataSnapshot.getValue(Message.class);
                 message.setTimestamp(Long.valueOf(dataSnapshot.getKey()));
